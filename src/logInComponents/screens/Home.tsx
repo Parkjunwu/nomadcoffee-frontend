@@ -1,7 +1,7 @@
 import { useReactiveVar } from "@apollo/client";
 import React from "react";
 import styled from "styled-components";
-import { darkModeVar, isLoggedInVar } from "../client";
+import { darkModeVar, isLoggedInVar } from "../../client";
 
 const LogOutBtn = styled.span`
   display:inline-block;

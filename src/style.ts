@@ -4,8 +4,13 @@ import reset from 'styled-reset'
 export const GlobalStyle = createGlobalStyle`
   body {
     ${reset}
+    /* margin: 0; */
     background-color: ${props => props.theme.bgColor};
     color: ${props => props.theme.fontColor};
+  }
+  a {
+    text-decoration:none;
+    color:inherit;
   }
 `
 
