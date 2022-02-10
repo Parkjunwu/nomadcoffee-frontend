@@ -5,14 +5,15 @@ import { useLocation, useHistory } from "react-router-dom";
 import { logInUser } from "../../client";
 import PageTitle from "../../shared/PageTitle";
 import { login, loginVariables } from "../../__generated__/login";
-import BodyContainer from "../components/BodyContainer";
+import BodyContainer from "../../shared/layout/BodyContainer";
 import { Form, SubmitBtn, TextInput } from "../components/FormComponent";
 import { LinkBtn, LinkBtnSmall } from "../components/LinkBtn";
 import LinkContainer from "../components/LinkContainer";
 import LinkToCreateAccount from "../components/LinkToCreateAccount";
 import LinkToFindUser from "../components/LinkToFindUser";
 import LOGIN_MUTATION from "../graphqlQuery/logIn";
-import Layout from "../layout/Layout";
+import NotLogInLayout from "../layout/NotLogInLayout";
+import { urlLink } from "../../urlLink";
 
 interface Ilocation {
   username: string;
@@ -43,31 +44,31 @@ const LogIn = () => {
     })
     if(result.data.login.ok) {
       logInUser(result.data.login.token)
-      history.push("/")
+      history.push(urlLink.FEED)
     } else {
       setError("result", {message:result.data.login.error})
     }
   };
   // console.log(data)
   return (
-    <Layout>
+    <NotLogInLayout>
       <PageTitle titleName="Create Account"/>
       <BodyContainer flex={1.5}>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <TextInput ref={register({required:true,})} name="username" type="text" placeholder="Username" />
-          {errors?.username?.message}
+          {errors?.username?.type}
           <TextInput ref={register({required:true,})} name="password" type="password" placeholder="Password" />
-          {errors?.password?.message}
+          {errors?.password?.type}
           <SubmitBtn type="submit" value="Log In" onSubmit={handleSubmit(onSubmit)} disabled={loading?true:false}/>
           {errors?.result?.message}
         </Form>
         
       </BodyContainer>
-      <LinkContainer flex={0.5}>
+      <LinkContainer flex={0.6}>
         <LinkBtn><LinkToCreateAccount /></LinkBtn>
         <LinkBtnSmall><LinkToFindUser /></LinkBtnSmall>
       </LinkContainer>
-    </Layout>
+    </NotLogInLayout>
   );
 }
 export default LogIn;

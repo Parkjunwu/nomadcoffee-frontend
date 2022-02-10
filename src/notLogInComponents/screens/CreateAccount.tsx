@@ -6,12 +6,12 @@ import { createUser, createUserVariables } from "../../__generated__/createUser"
 import { Form, SubmitBtn, TextInput } from "../components/FormComponent";
 import { LinkBtnSmall } from "../components/LinkBtn";
 import LinkToLogIn from "../components/LinkToLogIn";
-import Layout from "../layout/Layout";
 import { useHistory } from "react-router-dom";
 import { urlLink } from "../../urlLink";
 import CREATE_USER_MUTATION from "../graphqlQuery/createUser";
-import BodyContainer from "../components/BodyContainer";
+import BodyContainer from "../../shared/layout/BodyContainer";
 import LinkContainer from "../components/LinkContainer";
+import NotLogInLayout from "../layout/NotLogInLayout";
 
 
 function CreateAccount() {
@@ -56,7 +56,7 @@ function CreateAccount() {
   };
   // console.log(data)
   return (
-    <Layout>
+    <NotLogInLayout>
       <PageTitle titleName="Create Account"/>
       <BodyContainer flex={3}>
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -81,7 +81,7 @@ function CreateAccount() {
       <LinkContainer flex={0.5}>
         <LinkBtnSmall><LinkToLogIn /></LinkBtnSmall>
       </LinkContainer>
-    </Layout>
+    </NotLogInLayout>
   );
 }
 export default CreateAccount;

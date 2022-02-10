@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { color } from "../../color";
 import PageTitle from "../../shared/PageTitle";
@@ -7,7 +6,7 @@ import { LinkBtn, LinkBtnSmall } from "../components/LinkBtn";
 import LinkToCreateAccount from "../components/LinkToCreateAccount";
 import LinkToFindUser from "../components/LinkToFindUser";
 import LinkToLogIn from "../components/LinkToLogIn";
-import Layout from "../layout/Layout";
+import NotLogInLayout from "../layout/NotLogInLayout";
 
 const BodyContainer = styled.div`
   display: flex;
@@ -30,7 +29,7 @@ const CreateAccountBtn = styled.span`
 `;
 function Welcome() {
   return (
-    <Layout>
+    <NotLogInLayout>
       <PageTitle titleName="Welcome" />
       <BodyContainer>
         <CreateAccountBtn>
@@ -39,7 +38,7 @@ function Welcome() {
         <LinkBtn><LinkToLogIn /></LinkBtn>
         <LinkBtnSmall><LinkToFindUser /></LinkBtnSmall>
       </BodyContainer>
-    </Layout>  
+    </NotLogInLayout>  
   );
 }
 export default Welcome;

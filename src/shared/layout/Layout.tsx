@@ -19,18 +19,18 @@ const HeaderContainer = styled.div`
 `;
 const Header = styled.span`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,500;1,800&display=swap');
-  margin: auto;
   font-family: 'Open Sans', sans-serif;
+  margin: auto;
   font-size: 50px;
   font-weight: 900;
   font-style: italic;
 `;
 
-const Layout:React.FC = ({children}) => {
+const Layout:React.FC<{title:string}> = ({children,title}) => {
   return (
     <Container>
       <CenterContainer>
-        <HeaderContainer><Header>Nomad Coffee</Header></HeaderContainer>
+        <HeaderContainer><Header>{title}</Header></HeaderContainer>
         {children}
       </CenterContainer>
     </Container>

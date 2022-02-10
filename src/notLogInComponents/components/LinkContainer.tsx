@@ -11,6 +11,7 @@ const Container = styled.div<{flex:number}>`
 const DarkModeChange = styled.span`
   margin-top: 5px;
   font-size: 30px;
+  cursor: pointer;
 `;
 
 const LinkContainer:React.FC<{flex:number}> = ({children,flex}) => {
