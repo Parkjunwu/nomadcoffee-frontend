@@ -23,6 +23,11 @@ const EDIT_COFFEE_SHOP_MUTATION = gql`
     ) {
       ok
       error
+      addCategories{
+        id
+        name
+      }
+      deleteCategories
     }
   }
 `;

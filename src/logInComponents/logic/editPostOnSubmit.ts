@@ -1,4 +1,4 @@
-import { ApolloCache, DefaultContext, FetchResult, MutationFunctionOptions } from "@apollo/client";
+import { ApolloCache, DefaultContext, FetchResult, gql, MutationFunctionOptions } from "@apollo/client";
 import { ErrorOption } from "react-hook-form";
 import { urlLink } from "../../urlLink";
 import { editCoffeeShop, editCoffeeShopVariables } from "../../__generated__/editCoffeeShop";
@@ -61,9 +61,43 @@ const editPostOnSubmit = ({editCoffeeShopLoading,seeCoffeeShopData,editCoffeeSho
         })
       },
       update:(cache, result) => {
-        const {data:{editCoffeeShop:{ok}}} = result;
-        if(ok){
-
+        const {data:{editCoffeeShop:{ok,addCategories,deleteCategories}}} = result;
+        if(ok && addCategories || deleteCategories){
+          addCategories?.forEach(addCategoryObj => {
+            // if(addCategoryObj?.id){
+            const normalizedId = cache.identify({ id:addCategoryObj.id, __typename: 'Category' });
+            console.log(normalizedId)
+            const ref = cache.writeFragment({
+              id: `Category:${addCategoryObj.id}`,
+              fragment: gql`
+                fragment MyTodo on Category {
+                  id
+                  name
+                  slug
+                }
+              `,
+              data: {
+                id:addCategoryObj.id,
+                name:addCategoryObj.name,
+                slug:categories,
+              },
+            });
+            console.log(ref)
+            cache.modify({
+              id:`CoffeeShop:${id}`,
+              fields:{
+                wholeCategories(prev){
+                  return [...prev,ref]
+                }
+              }
+            })
+          })
+          deleteCategories?.forEach(id => {
+            const normalizedId = cache.identify({ id, __typename: 'Category' });
+            console.log(normalizedId)
+            cache.evict({ id: normalizedId });
+          })
+          cache.gc();
         }
       }
     })

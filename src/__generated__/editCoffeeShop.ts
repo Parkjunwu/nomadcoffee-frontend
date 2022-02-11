@@ -7,10 +7,18 @@
 // GraphQL mutation operation: editCoffeeShop
 // ====================================================
 
+export interface editCoffeeShop_editCoffeeShop_addCategories {
+  __typename: "AddCategoryObj";
+  id: number | null;
+  name: string | null;
+}
+
 export interface editCoffeeShop_editCoffeeShop {
-  __typename: "MutationResult";
+  __typename: "EditCoffeeShopResult";
   ok: boolean;
   error: string | null;
+  addCategories: (editCoffeeShop_editCoffeeShop_addCategories | null)[] | null;
+  deleteCategories: (number | null)[] | null;
 }
 
 export interface editCoffeeShop {
@@ -23,7 +31,7 @@ export interface editCoffeeShopVariables {
   latitude?: string | null;
   longitude?: string | null;
   deletePhotoIdArr?: (number | null)[] | null;
-  addPhotoUrl?: any | null;
+  addPhotoUrl?: string | null;
   prevCategories?: (string | null)[] | null;
   categories?: string | null;
 }
